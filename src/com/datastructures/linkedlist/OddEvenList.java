@@ -15,6 +15,24 @@ public class OddEvenList {
         odd.next=firstEven;
         return head;
     }
+    public Node evenOddSeparate(Node head){
+        if(head==null) return head;
+        Node even=head.next,odd=head,firstEven=head.next,firstOdd=head,lastEven = null;
+        while(even!=null && even.next!=null){
+            Node nextOdd=odd.next.next;
+            odd.next=nextOdd;
+            odd=nextOdd;
+            Node nextEven=even.next.next;
+            if(nextEven==null) lastEven=even;
+            even.next=nextEven;
+            even=nextEven;
+        }
+        if(lastEven!=null){
+            lastEven.next=firstOdd;
+        }
+        head=firstEven;
+        return head;
+    }
     public void printList(Node head){
         if(head==null) return;
         System.out.println(head.key);
@@ -25,7 +43,10 @@ public class OddEvenList {
         GenerateList list=new GenerateList();
         OddEvenList oe=new OddEvenList();
         Node head=list.generateList(6);
-        head=oe.oddEvenSeparate(head);
+//        head=oe.oddEvenSeparate(head);
+//        oe.printList(head);
+        System.out.println("--------------------------------");
+        head=oe.evenOddSeparate(head);
         oe.printList(head);
     }
 }
