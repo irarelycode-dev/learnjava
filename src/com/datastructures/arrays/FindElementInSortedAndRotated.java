@@ -1,7 +1,5 @@
 package com.datastructures.arrays;
 
-import org.w3c.dom.ls.LSOutput;
-
 interface ElementInSortedAndRotatedArray{
     int findElement(int[] arr,int key);
 }
