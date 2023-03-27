@@ -51,6 +51,16 @@ public class Bipartite {
         return true;
     }
 
+    static boolean isBiPartiteDfs(int node,int color,int[] colors){
+        colors[node]=color;
+        for(int neighbor:adjList.get(node)){
+            if(colors[neighbor]==-1){
+                if(!isBiPartiteDfs(node,color==1?0:1,colors)) return false;
+            }else if(colors[neighbor]==color) return false;
+        }
+        return true;
+    }
+
     private static boolean bfs(int src, int[] visited, int[] colors) {
         Queue<Integer> q = new PriorityQueue<>();
         q.add(src);
