@@ -9,15 +9,11 @@ public class KahnsAlgorithmTopologicalSort {
     private static final HashMap<Integer, ArrayList<Integer>> adjList = new HashMap<>();
 
     public static void main(String[] args) {
-        addEdge(5, 0);
-        addEdge(5, 2);
-        addEdge(4, 0);
-        addEdge(4, 1);
-        addEdge(3, 1);
+        addEdge(0, 1);
+        addEdge(1, 2);
         addEdge(2, 3);
-        addEdge(1, -1);
-        addEdge(0, -1);
-        topologicalSort(6);
+        addEdge(3, 0);
+        topologicalSort(4);
     }
 
     private static void addEdge(int src, int dest) {
@@ -30,19 +26,6 @@ public class KahnsAlgorithmTopologicalSort {
             neighbors = adjList.get(src);
             neighbors.add(dest);
         }
-    }
-
-    //returns vertex with min indegree
-    private static int findMin(int[] indeg) {
-        int min = Integer.MAX_VALUE;
-        int idx = -1;
-        for (int i = 0; i < indeg.length; i++) {
-            if (indeg[i] != -1 && min >= indeg[i]) {
-                min = indeg[i];
-                idx = i;
-            }
-        }
-        return idx;
     }
 
     public static void topologicalSort(int v) {
@@ -59,18 +42,21 @@ public class KahnsAlgorithmTopologicalSort {
         }
 
         Queue<Integer> q = new PriorityQueue<>();
-        q.add(findMin(indeg));
+        for (int i = 0; i < v; i++) {
+            if (indeg[i] == 0) q.add(i);
+        }
+        ArrayList<Integer> res = new ArrayList<>();
         while (q.size() != 0) {
             int vertex = q.poll();
             indeg[vertex] = -1;
-            System.out.print(vertex + " ");
+            res.add(vertex);
             for (int neighbor : adjList.get(vertex)) {
                 indeg[neighbor]--;
+                if (indeg[neighbor] == 0) q.add(neighbor);
             }
-            vertex = findMin(indeg);
-            if (vertex == -1) break;
-            q.add(vertex);
         }
+
+        System.out.println(res);
 
     }
 
