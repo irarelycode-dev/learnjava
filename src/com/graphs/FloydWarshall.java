@@ -1,5 +1,8 @@
 package com.graphs;
 
+import java.util.HashMap;
+import java.util.*;
+
 public class FloydWarshall {
     final static double INF = Double.POSITIVE_INFINITY, V = 7;
 
@@ -20,18 +23,34 @@ public class FloydWarshall {
 
         int i, j, k;
 
+        Map<String, Integer> count = new HashMap<>();
+
         for (k = 0; k < V; k++) {
             for (i = 0; i < V; i++) {
                 for (j = 0; j < V; j++) {
+                    String key = "(" + i + "," + j + ")";
                     if (cost[i][k] + cost[k][j] < cost[i][j]) {
                         cost[i][j] = cost[i][k] + cost[k][j];
+                        if (!count.containsKey(key)) {
+                            count.putIfAbsent(key, 1);
+                        } else {
+                            count.putIfAbsent(key, 1);
+                        }
+                    }
+                    if (cost[i][k] + cost[k][j] == cost[i][j]) {
+                        if (!count.containsKey(key)) {
+                            count.putIfAbsent(key, 1);
+                        } else {
+                            count.put(key, count.get(key) + 1);
+                        }
                     }
                 }
             }
-            printSolution(cost,false);
+            printSolution(cost, false);
             System.out.println("***************************************");
         }
         printSolution(cost, true);
+        System.out.println("Final solution:" + count);
     }
 
     void printSolution(double[][] dist, boolean flag) {
