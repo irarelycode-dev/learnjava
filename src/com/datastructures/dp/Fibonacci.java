@@ -13,6 +13,8 @@ public class Fibonacci {
     }
 
     //tabulation approach-bottom up approach-from base case to required answer
+    //space complexity:O(n)->can be reduced to O(1)
+    //time complexity:O(n)
     private static int fibTabulation(int n,int[] dp){
         dp[0]=0;
         dp[1]=1;
