@@ -31,7 +31,8 @@ public class FrogJump {
         int[] energies={30,10,60,10,60,50};
         int[] dp=new int[energies.length];
         Arrays.fill(dp,-1);
+        dp[0]=0;
 //        System.out.println(frogJump(energies,energies.length-1,dp));
-        System.out.println(frogJumpTabulation(energies,dp));
+//        System.out.println(frogJumpTabulation(energies,dp));
     }
 }
