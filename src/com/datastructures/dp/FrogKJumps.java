@@ -19,6 +19,8 @@ public class FrogKJumps {
         return dp[index]=min;
     }
 
+    //T.C: O(n*k)
+    //Space:O(n)
     private static int frogKJumpsBottomupApproach(int[] energies,int k){
         int[] dp=new int[energies.length];
         Arrays.fill(dp,-1);
@@ -26,7 +28,7 @@ public class FrogKJumps {
         for(int i=1;i<energies.length;++i){
             int tmp=Integer.MAX_VALUE;
             for(int j=1;j<=k;++j){
-                tmp=Math.min(tmp,Math.abs(energies[i]-energies[j]));
+                if(i-j>=0) tmp=Math.min(tmp,Math.abs(energies[i]-energies[i-j]));
             }
             dp[i]=tmp;
         }
