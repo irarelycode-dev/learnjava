@@ -21,6 +21,8 @@ public class KthToLast {
         if (count == k) target = head.key;
     }
 
+    //tc: O(N) if k is 1, < O(N/2) if k < n/2
+    //sc: O(1)
     private static int kthToLast2(Node head, int k) {
         Node first = head;
         Node second;
